@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:include filename="inertia_tensors.xacro"/>
+  <xacro:include filename="pioneer3dx_chassis.xacro"/>
+  <xacro:include filename="battery_block.xacro"/>
+  <xacro:include filename="pioneer3dx_wheel.xacro"/>
+  <xacro:include filename="pioneer3dx_swivel.xacro"/>
+  <xacro:include filename="pioneer3dx_sonar.xacro"/>
+  <xacro:include filename="pioneer3dx_plugins.xacro"/>
+
+  <xacro:macro name="pioneer3dx_body" params="name parent meshes">
+
+    <!-- base_link -->
+    <link name="${parent}"/>
+
+    <!-- Chassis -->
+    <xacro:pioneer_chassis name="${name}" parent="base_link" xyz="0 0 0" rpy="0 0 0" meshes="${meshes}"/>
+
+    <!-- Front Sonar -->
+    <xacro:pioneer_sonar name="sonar" parent="${name}" xyz="0.109 0 0.209" rpy="0 0 0" meshes="${meshes}"/>
+
+    <!-- Akku0 -->
+    <xacro:battery_block name="battery0" parent="${name}" x="-0.14" y="0.00" z="0.13" mass="2.5" />
+
+    <!-- Wheels -->
+    <xacro:pioneer_wheel side="right" parent="${name}" xyz="0 -0.15 0.09" rpy="0 0 0" radius="0.09" meshes="${meshes}"/>
+    <xacro:pioneer_wheel side="left" parent="${name}" xyz="0 0.15 0.09" rpy="0 0 0" radius="0.09" meshes="${meshes}"/>
+    <xacro:pioneer_swivel parent="${name}" xyz="-0.185 0 0.055" rpy="0 0 0" meshes="${meshes}"/>
+
+
+
+    <!-- support_left FOR MULTIPLE ROBOT EXPLORATION 2021.9.29.16:08-->
+    <joint name="support_joint_left" type="fixed">
+      <origin xyz="-0.05 0.12 0.48" rpy="0 0 0"/> <!--offect-->
+      <parent link="base_link"/>
+      <child link="support_left"/>
+    </joint>
+    <link name="support_left">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry name="support_left_geom">
+          <box size="0.08 0.09 0.5"/>
+        </geometry>
+  <material name="grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+      </visual>
+
+      <collision>
+        <origin xyz="-0.07 0 0.0" rpy="0 0 0"/> <!--set ocllision like visiual/origin-->
+        <geometry name="support_left_geom_coll"> <!--set ocllision like visiual/geometry-->
+          <!-- <box size="0.2 0.35 0.5"/> -->
+          <box size="0.25 0.15 0.5"/>
+        </geometry>
+      </collision>
+
+      <xacro:box_inertial x="0.0" y="0.0" z="0.0" mass="1.0" />
+
+    </link>
+    <gazebo reference="support_left">
+      <material value="Gazebo/Grey"/>
+    </gazebo>
+    <!-- support_right -->
+    <joint name="support_joint_right" type="fixed">
+      <origin xyz="-0.05 -0.12 0.48" rpy="0 0 0"/> <!--offect-->
+      <parent link="base_link"/>
+      <child link="support_right"/>
+    </joint>
+    <link name="support_right">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry name="support_right_geom">
+          <box size="0.08 0.09 0.5"/>
+        </geometry>
+   <material name="grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+
+      </visual>
+
+      <collision>
+        <origin xyz="-0.07 0 0.0" rpy="0 0 0"/> <!--set ocllision like visiual/origin-->
+        <geometry name="support_right_geom_coll"> <!--set ocllision like visiual/geometry-->
+          <!-- <box size="0.2 0.35 0.5"/> -->
+          <box size="0.25 0.15 0.5"/>
+
+        </geometry>
+      </collision>
+
+      <xacro:box_inertial x="0.0" y="0.0" z="0.0" mass="1.0" />
+
+    </link>
+    <gazebo reference="support_right">
+      <material value="Gazebo/Grey"/>
+    </gazebo>
+    <!-- support_top -->
+    <joint name="support_joint_top" type="fixed">
+      <origin xyz="0 0.15 0.21" rpy="0 0 1.57"/> <!--offect-->
+      <parent link="support_right"/>
+      <child link="support_top"/>
+    </joint>
+    <link name="support_top">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry name="support_top_geom">
+          <box size="0.27 0.08 0.08"/>
+        </geometry>
+  <material name="grey">
+    <color rgba="0.2 0.2 0.2 1.0"/>
+  </material>
+
+      </visual>
+
+      <collision>
+        <origin xyz="0.0 0 0.0" rpy="0 0 0"/> <!--set ocllision like visiual/origin-->
+        <geometry name="support_top_geom_coll"> <!--set ocllision like visiual/geometry-->
+          <box size="0.10 0.1 0.1"/>
+        </geometry>
+      </collision>
+
+      <xacro:box_inertial x="0.0" y="0.0" z="0.0" mass="1.0" />
+
+    </link>
+    <gazebo reference="support_top">
+      <material value="Gazebo/Grey"/>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

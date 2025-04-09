@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<robot name="sensor_hokuyo_utm30lx"
+  xmlns:xacro="http://wiki.ros.org/xacro">
+
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+  <xacro:macro name="sensor_hokuyo_utm30lx" params="namespace prefix parent meshes prefix_topic:='' *origin min_angle:='${-135.0*M_PI/180.0}' max_angle:='${135.0*M_PI/180.0}' gpu:=false">
+
+    <joint name="${prefix}_base_joint" type="fixed">
+      <!-- FRONT MOUNT  -->
+      <!-- origin xyz="0.29 0 0.1" -->
+      <!-- TOP MOUNT -->
+      <!-- origin xyz="0.0 0.0 0.325"-->
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${prefix}_base_link"/>
+    </joint>
+
+
+    <link name="${prefix}_base_link">
+      <visual>
+        <origin xyz="0 0 0.055" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="${meshes}/hokuyo_utm_30lx.dae"/>
+        </geometry>
+      </visual>
+
+      <!-- COLLISION 20211105 -->
+      <!-- <collision>
+        <origin xyz="-0.22 0 0.055" rpy="0 0 0"/>
+        <geometry>
+           <box size="0.3 0.15 0.1"/>
+        </geometry>
+      </collision> -->
+
+
+
+      <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+
+    <link name="${prefix}_link">
+    </link>
+    <joint name="${prefix}_joint" type="fixed">
+      <parent link="${prefix}_base_link"/>
+      <child link="${prefix}_link"/>
+      <origin xyz="0.00 0 0.055" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Hokuyo sensor for simulation -->
+    <xacro:sensor_hokuyo_utm_gazebo prefix="${prefix}" prefix_topic="${prefix_topic}" min_angle="${min_angle}" max_angle="${max_angle}" gpu="${gpu}"/>
+
+  </xacro:macro>
+
+  <xacro:macro name="sensor_hokuyo_utm_gazebo" params="prefix prefix_topic:='' min_angle:='${-135.0*M_PI/180.0}' max_angle:='${135.0*M_PI/180.0}' gpu:=false">
+    <gazebo reference="${prefix}_link">
+      <xacro:if value="${gpu}">
+        <sensor type="gpu_ray" name="${prefix}_sensor">
+          <pose>0 0 0 0 0 0</pose>
+          <visualize>false</visualize>
+          <update_rate>30</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1081</samples>
+                <resolution>1</resolution>
+                <min_angle>${min_angle}</min_angle>
+                <max_angle>${max_angle}</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.10</min>
+              <max>20.0</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </ray>
+          <plugin name="${prefix}_controller" filename="libgazebo_ros_gpu_laser.so">
+            <topicName>scan</topicName>
+            <frameName>${namespace}/${prefix}_link</frameName>
+          </plugin>
+        </sensor>
+      </xacro:if>
+      <xacro:unless value="${gpu}">
+        <sensor type="ray" name="${prefix}_sensor">
+          <pose>0 0 0 0 0 0</pose>
+          <visualize>false</visualize>
+          <update_rate>30</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1081</samples>
+                <resolution>1</resolution>
+                <min_angle>${min_angle}</min_angle>
+                <max_angle>${max_angle}</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.10</min>
+              <max>20.0</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+              <type>gaussian</type>
+              <mean>0.0</mean>
+              <stddev>0.001</stddev>
+            </noise>
+          </ray>
+          <plugin name="${prefix}_controller" filename="libgazebo_ros_laser.so">
+            <topicName>scan</topicName>
+            <frameName>${namespace}/${prefix}_link</frameName>
+          </plugin>
+        </sensor>
+      </xacro:unless>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

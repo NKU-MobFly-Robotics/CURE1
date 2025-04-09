@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Parameters -->
+   <arg name="world_name" default="$(find rrt_exploration_tutorials)/launch/includes/worlds/office02.world"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- Robot pose -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="a" default="1.5708"/>
+  <arg name="robot_name" default="/" />
+  <!-- Running gazebo simulation platform -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+ <!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"/> -->
+
+  <!-- Spawn p3dx mobile robot -->
+  <include file="$(find p3dx_gazebo)/launch/spawn_p3dx.launch">
+    <arg name="robot_name" value="robot_1" />
+    <arg name="x" value="0.0" />
+    <arg name="y" value="0.0" />
+    <arg name="a" value="0" />
+  </include>
+<!--<node pkg="rviz" type="rviz" name="rviz" args="-d $(find p3dx_gazebo)/launch/pioneer3dx.rviz">
+</node> -->
+</launch>

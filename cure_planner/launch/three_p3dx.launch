@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- <arg name="map_filename" value="$(find cure_planner)/maps/map.yaml" /> -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" value="false"/>
+    <!-- <arg name="world_name" value="$(find cure_planner)/worlds/maze.world"/> -->
+    <arg name="world_name" value="$(find cure_planner)/worlds/office.world"/>
+  </include>
+
+  <group ns="/robot_1">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="robot_1"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_1" pkg="gazebo_ros" type="spawn_model" args="
+        -x 0.0
+        -y 0.0
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model robot_1" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="robot_1"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="robot_1"/>
+    </include> 
+
+  <node pkg="cure_planner" type="merge_map" name="merge_map" output="screen">
+	  <param name="n_robot" value = "3" />
+    <param name="robot_id" value = "1" />
+    <param name="map_x" value = "-20.0" />
+    <param name="map_y" value = "-20.0" />
+    <param name="map_width" value = "400" />
+    <param name="map_height" value = "400" />
+  </node>
+  </group>
+
+  <group ns="/robot_2">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="robot_2"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_2" pkg="gazebo_ros" type="spawn_model" args="
+        -x 0.0
+        -y -1.5
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model robot_2" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control2.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="robot_2"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="robot_2"/>
+    </include> 
+    <node pkg="cure_planner" type="merge_map" name="merge_map" output="screen">
+      <param name="n_robot" value = "3" />
+      <param name="robot_id" value = "2" />
+      <param name="map_x" value = "-20.0" />
+      <param name="map_y" value = "-20.0" />
+      <param name="map_width" value = "400" />
+      <param name="map_height" value = "400" />
+    </node>
+  </group>
+
+  <group ns="/robot_3">
+    <include file="$(find p3dx_description)/launch/description.launch">
+      <arg name="namespace" value="robot_3"/>
+    </include>
+    <node name="spawn_p3dx_model_robot_3" pkg="gazebo_ros" type="spawn_model" args="
+        -x 0.0
+        -y 1.5
+        -Y 0
+        -unpause
+        -urdf
+        -param robot_description
+        -model robot_3" />
+    <rosparam command="load" file="$(find p3dx_control)/config/control3.yaml" />
+    <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="tf_prefix" type="string" value="robot_3"/>
+    </node>
+    <include file="$(find cure_planner)/launch/gmapping_move_base.launch">
+      <arg name="namespace" value="robot_3"/>
+    </include> 
+    <node pkg="cure_planner" type="merge_map" name="merge_map" output="screen">
+      <param name="n_robot" value = "3" />
+      <param name="robot_id" value = "3" />
+      <param name="map_x" value = "-20.0" />
+      <param name="map_y" value = "-20.0" />
+      <param name="map_width" value = "400" />
+      <param name="map_height" value = "400" />
+    </node>
+  </group>
+
+  <node pkg="tf" type="static_transform_publisher" name="robot3_to_robot1" args="0 1.5 0 0 0 0 /robot_1/map /robot_3/map 20" />
+  <node pkg="tf" type="static_transform_publisher" name="robot2_to_robot1" args="0 -1.5 0 0 0 0 /robot_1/map /robot_2/map 20" />
+  <node pkg="tf" type="static_transform_publisher" name="map_to_r1map" args="0.0 0.0 0.0 0.0 0.0 0.0 /map /robot_1/map 100" />
+
+  <!-- <include file="$(find cure_planner)/launch/initposes.launch"/> -->
+  <!-- <include file="$(find cure_planner)/launch/map_merge.launch"/>  -->
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find cure_planner)/launch/three_robot.rviz">
+    <remap from="move_base_simple/goal" to="robot_1/move_base_simple/goal"/>
+  </node>
+  
+  <node pkg="cure_planner" type="robot_position" name="robot_position" output="screen">
+	  <param name="n_robot" value = "3" />
+  </node>
+
+  <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_filename)" output="screen">
+    <param name="frame_id" value="map"/>
+    <remap from="map" to="empty_map"/>
+  </node> -->
+</launch>

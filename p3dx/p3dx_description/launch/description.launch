@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="namespace" default="default_ns"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find p3dx_description)/urdf/p3dx/pioneer3dx.xacro' namespace:=$(arg namespace)" />
+</launch>

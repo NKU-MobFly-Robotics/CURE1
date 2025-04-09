@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<env name="GAZEBO_RESOURCE_PATH" value="$(find rrt_exploration_tutorials)/launch/includes/meshes"/>
+<!-- start Gazebo with an empty world -->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+<arg name="use_sim_time" value="true"/>
+<arg name="debug" value="false"/>
+<arg name="world_name" value="$(find rrt_exploration_tutorials)/launch/includes/worlds/test02.world"/>
+</include>
+
+<group ns="/robot_1">
+  <!-- Spawn p3dx mobile robot -->
+  <!-- Load robot description -->
+  <include file="$(find p3dx_description)/launch/description.launch" />
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_p3dx_model_robot_1" pkg="gazebo_ros" type="spawn_model" args="
+      -x 0.0
+      -y 0.0
+      -Y 0.0
+      -unpause
+      -urdf
+      -param robot_description
+      -model robot_1" />
+  <!-- Load controller configuration -->
+  <rosparam command="load" file="$(find p3dx_control)/config/control.yaml" />
+
+  <!-- Spawn controllers -->
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+   <param name="tf_prefix" type="string" value="robot_1"/>
+</node>
+	<include file="$(find rrt_exploration_tutorials)/launch/includes/move_baseSafe_p3dx.launch">
+		<arg name="namespace" value="robot_1"/>
+	</include> 
+</group>
+
+<group ns="/robot_2">
+  <!-- Spawn p3dx mobile robot -->
+  <!-- Load robot description -->
+  <include file="$(find p3dx_description)/launch/description.launch" />
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_p3dx_model_robot_2" pkg="gazebo_ros" type="spawn_model" args="
+      -x 0.0
+      -y -0.8
+      -Y 0.0
+      -unpause
+      -urdf
+      -param robot_description
+      -model robot_2" />
+  <!-- Load controller configuration -->
+  <rosparam command="load" file="$(find p3dx_control)/config/control2.yaml" />
+
+  <!-- Spawn controllers -->
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+   <param name="tf_prefix" type="string" value="robot_2"/>
+</node>
+	<include file="$(find rrt_exploration_tutorials)/launch/includes/move_baseSafe_p3dx.launch">
+		<arg name="namespace" value="robot_2"/>
+	</include> 
+</group>
+
+<group ns="/robot_3">
+  <!-- Spawn p3dx mobile robot -->
+  <!-- Load robot description -->
+  <include file="$(find p3dx_description)/launch/description.launch" />
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_p3dx_model_robot_3" pkg="gazebo_ros" type="spawn_model" args="
+      -x 0.0
+      -y 0.8
+      -Y 0.0
+      -unpause
+      -urdf
+      -param robot_description
+      -model robot_3" />
+  <!-- Load controller configuration -->
+  <rosparam command="load" file="$(find p3dx_control)/config/control3.yaml" />
+
+  <!-- Spawn controllers -->
+  <node name="base_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="p3dx_joint_publisher RosAria"/>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+   <param name="tf_prefix" type="string" value="robot_3"/>
+</node>
+	<include file="$(find rrt_exploration_tutorials)/launch/includes/move_baseSafe_p3dx.launch">
+		<arg name="namespace" value="robot_3"/>
+	</include> 
+</group>
+
+<node pkg="tf" type="static_transform_publisher" name="robot3_to_robot1" args="0 0.8 0 0 0 0 /robot_1/map /robot_3/map 20" />
+
+<node pkg="tf" type="static_transform_publisher" name="robot2_to_robot1" args="0 -0.8 0 0 0 0 /robot_1/map /robot_2/map 20" />
+<include file="$(find rrt_exploration_tutorials)/launch/includes/initposes.launch"/>
+<include file="$(find rrt_exploration_tutorials)/launch/includes/map_merge.launch"/> 
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find rrt_exploration_tutorials)/launch/includes/rviz_config/three.rviz">
+<remap from="move_base_simple/goal" to="robot_1/move_base_simple/goal"/>
+</node>
+
+</launch>

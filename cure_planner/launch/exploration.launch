@@ -1,0 +1,22 @@
+<launch>
+	<node pkg="cure_planner" type="get_voronoi_centroid" name="get_voronoi_centroid" output="screen">
+		<param name="n_robot" value = "3" />
+		<param name="map_topic" value = "/merged_map" />
+	</node>
+	<node pkg="cure_planner" type="frontiers" name="frontiers" output="screen">
+		<param name="frontiers_map_topic" value = "/merged_map" />
+	</node>
+	<node pkg="cure_planner" type="target_assigner" name="target_assigner" output="screen">
+		<param name="map_topic" value="/merged_map"/>
+		<param name="global_frame" value="map"/>
+		<!-- large scene: 3   small scene: 1 -->
+		<param name="info_r_max" value="1"/> 
+		<param name="info_r_step" value="0.2"/> 
+		<param name="info_r_min" value="0.2"/> 
+		<param name="info_multiplier" value="1.0"/> 
+		<param name="n_robots" value="3"/>
+		<param name="robot_namespace" value="/robot_"/>
+		<param name="delay_after_assignement" value="0.5"/>
+		<param name="rateHz" value="1"/>
+	</node>
+</launch>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="robot_name"/>
+  <!-- Robot pose -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="a" default="1.5708"/>
+
+  <!-- Load robot description -->
+  <include file="$(find p3dx_description)/launch/description.launch" />
+
+  <!-- Spawn robot in gazebo -->
+  <node name="spawn_p3dx_model_$(arg robot_name)" pkg="gazebo_ros" type="spawn_model" args="-x $(arg x)
+      -y $(arg y)
+      -Y $(arg a)
+      -unpause
+      -urdf
+      -param robot_description
+      -model $(arg robot_name)" />
+
+ <include file="$(find p3dx_control)/launch/control.launch">
+		<arg name="robot_name" value="$(arg robot_name)"/>
+	</include> 
+   <!-- <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+   <param name="tf_prefix" type="string" value="$(arg robot_name)"/> -->
+</launch>

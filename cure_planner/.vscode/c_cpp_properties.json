@@ -1,0 +1,46 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/bqc/competition_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/bqc/competition_ws/src/costmap_converter/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/depthimage_to_laserscan/include/**",
+        "/home/bqc/study_ws/src/graph_search-master/include/**",
+        "/home/bqc/competition_ws/src/husky/husky_base/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_auto_docking/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_bumper2pc/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_controller_tutorial/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_desktop/kobuki_gazebo_plugins/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_keyop/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_node/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_random_walker/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_safety_controller/include/**",
+        "/home/bqc/competition_ws/src/m-explore-master/map_merge/include/**",
+        "/home/bqc/competition_ws/src/open_karto/include/**",
+        "/home/bqc/competition_ws/src/pointclouds_obstacle/include/**",
+        "/home/bqc/competition_ws/src/realsense-ros/realsense2_camera/include/**",
+        "/home/bqc/competition_ws/src/realsense_gazebo_plugin/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/robot_pose_ekf/include/**",
+        "/home/bqc/competition_ws/src/cure_planner/include/**",
+        "/home/bqc/competition_ws/src/rrt_exploration/include/**",
+        "/home/bqc/competition_ws/src/simple_navigation_goals/include/**",
+        "/home/bqc/competition_ws/src/slam_karto_ceres/include/**",
+        "/home/bqc/competition_ws/src/sparse_bundle_adjustment/include/**",
+        "/home/bqc/competition_ws/src/teb_local_planner/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/turtlebot_apps/turtlebot_actions/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/kobuki_desktop/joystick_drivers/wiimote/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/yocs_cmd_vel_mux/include/**",
+        "/home/bqc/competition_ws/src/kobuki_package/yocs_controllers/include/**",
+        "/home/bqc/competition_ws/src/yolov4/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

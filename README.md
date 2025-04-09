@@ -1,6 +1,6 @@
 # CURE1
 
-**CURE1** is a multi-robot autonomous exploration planner that first proposed using unknown regions to guide exploration. This is a minimalist version of CURE1 that you can quickly deploy and run. The "region-guided" multi-robot autonomous exploration planner CURE1 (Centroids of Unknown Regions Exploration) breaks through the local field of view limitations of the frontier method and greatly improves exploration efficiency.
+**CURE1** is a multi-robot autonomous exploration planner that first proposed using unknown regions to guide exploration. This is a minimalist version of CURE1 that you can quickly deploy and run. The "region-guided" multi-robot autonomous exploration planner CURE1 (Centroids of Unknown Regions Exploration) breaks through the local field of view limitation of the frontier method and greatly improves exploration efficiency.
 
 <p align="center">
  <img src="img/kt.png" width = "550" height = "270" />

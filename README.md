@@ -52,7 +52,7 @@ Then simply clone and compile our package:
 
 ```bash
 cd ${YOUR_WORKSPACE_PATH}/src
-git clone git@github.com:NKU-MobFly-Robotics/CURE.git
+git clone git@github.com:NKU-MobFly-Robotics/CURE1.git
 cd ../ 
 catkin_make
 ```

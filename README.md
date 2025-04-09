@@ -5,6 +5,10 @@ CURE1 is a multi-robot exploration planner that first proposed using unknown reg
 <img src="/img/1743478992227.gif" alt="1743478992227" style="zoom:80%;" />
 
 <img src="/img/1743478986393.gif" alt="1743478986393" style="zoom:60%;" />
+<p align="center">
+ <img src="image/1743478992227.gif" width = "270" height = "278" />
+ <img src="image/1743478992227.gif" width = "500" height = "278" />
+</p>
 
 **Video Link:** [Bilibili Video 1](https://www.bilibili.com/video/BV1j64zePEbZ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=0e7c59dd804a18d9a9c201eafe9ac6e5); [Bilibili Video 2](https://www.bilibili.com/video/BV1oB4zeeEDm/?spm_id_from=333.1387.homepage.video_card.click&vd_source=0e7c59dd804a18d9a9c201eafe9ac6e5); [Youtube](https://youtu.be/P5jXKlGQOec)
 

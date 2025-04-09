@@ -4,12 +4,12 @@ CURE1 is a multi-robot exploration planner that first proposed using unknown reg
 
 
 <p align="center">
- <img src="img/1743478986393.gif" width = "500" height = "200" />
- <img src="img/1743478992227.gif" width = "500" height = "200" />
+ <img src="img/1743478986393.gif" width = "500" height = "250" />
+ <img src="img/1743478992227.gif" width = "500" height = "250" />
 </p>
 <div style="display: flex; justify-content: center; gap: 10px;">
 	<figure>
-  		<img src="img/1743478986393.gif" style="zoom:10%;" />
+  		<img src="img/1743478986393.gif" style="zoom:1%;" />
     </figure>
     <figure>
   		<img src="img/1743478992227.gif" style="zoom:10%;" />

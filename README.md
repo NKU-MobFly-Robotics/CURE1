@@ -2,9 +2,9 @@
 
 CURE1 is a multi-robot exploration planner that first proposed using unknown regions to guide exploration. This is a minimalist version of CURE1 that you can quickly deploy and run.
 
-<img src="/home/bqc/Github/CURE/src/img/1743478992227.gif" alt="1743478992227" style="zoom:80%;" />
+<img src="/img/1743478992227.gif" alt="1743478992227" style="zoom:80%;" />
 
-<img src="/home/bqc/Github/CURE/src/img/1743478986393.gif" alt="1743478986393" style="zoom:60%;" />
+<img src="/img/1743478986393.gif" alt="1743478986393" style="zoom:60%;" />
 
 **Video Link:** [Bilibili Video 1](https://www.bilibili.com/video/BV1j64zePEbZ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=0e7c59dd804a18d9a9c201eafe9ac6e5); [Bilibili Video 2](https://www.bilibili.com/video/BV1oB4zeeEDm/?spm_id_from=333.1387.homepage.video_card.click&vd_source=0e7c59dd804a18d9a9c201eafe9ac6e5); [Youtube](https://youtu.be/P5jXKlGQOec)
 

@@ -14,7 +14,7 @@
 
 **Paper:** [IEEE](https://ieeexplore.ieee.org/document/10155622)
 
-> Q. Bi et al., "CURE: A Hierarchical Framework for Multi-Robot Autonomous Exploration Inspired by Centroids of Unknown Regions," in IEEE Transactions on Automation Science and Engineering, vol. 21, no. 3, pp. 3773-3786, July 2024, doi: 10.1109/TASE.2023.3285300.
+> Q. Bi, X. Zhang*, et al., "CURE: A Hierarchical Framework for Multi-Robot Autonomous Exploration Inspired by Centroids of Unknown Regions," in IEEE Transactions on Automation Science and Engineering, vol. 21, no. 3, pp. 3773-3786, July 2024, doi: 10.1109/TASE.2023.3285300.
 
 If it is useful to you, please cite our paper and ⭐️ our code. Thanks!
 

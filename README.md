@@ -4,8 +4,8 @@ CURE1 is a multi-robot exploration planner that first proposed using unknown reg
 
 
 <p align="center">
- <img src="img/1743478986393.gif" width = "500" height = "278" />
- <img src="img/1743478992227.gif" width = "500" height = "278" />
+ <img src="img/1743478986393.gif" width = "500" height = "200" />
+ <img src="img/1743478992227.gif" width = "500" height = "200" />
 </p>
 <div style="display: flex; justify-content: center; gap: 10px;">
 	<figure>

@@ -24,6 +24,8 @@ If it is useful to you, please cite our paper and ⭐️ our code. Thanks!
 - Jun 6, 2023: The paper is accepted by T-ASE.
 - Nov 11, 2022: The paper is submitted to T-ASE.
 
+**Other Links**: [uneven terrain exploration code LRAE](https://github.com/NKU-MobFly-Robotics/LRAE)
+
 ## Quick Start
 
 These instructions assume that ROS Noetic desktop-full is installed. 
